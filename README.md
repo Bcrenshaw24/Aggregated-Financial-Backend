@@ -1,4 +1,4 @@
-## Fraud Detection Pipeline
+## Distributed Financial Analytics 
 
 The services are connected in this order:
 
