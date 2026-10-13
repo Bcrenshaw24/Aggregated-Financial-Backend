@@ -5,7 +5,6 @@ import (
 	"finance/internal/services"
 	"fmt"
 	"net/http"
-	"uuid"
 )
 
 var Mock = true
@@ -16,10 +15,12 @@ func main() {
 	mux := http.NewServeMux()
 	users := services.UserService{
 		Running:  true,
-		Accounts: make(map[uuid.UUID]*entities.Account),
+		Accounts: make(map[string]*entities.Account),
 	}
 
 	mux.HandleFunc("POST /account", users.HandleAccountCreation)
+
+	mux.HandleFunc("GET /account/{email}", users.GetAccountDetails)
 	fmt.Println("Listening on port:8000")
 	if err := http.ListenAndServe("localhost:8000", mux); err != nil {
 		fmt.Println(err.Error())

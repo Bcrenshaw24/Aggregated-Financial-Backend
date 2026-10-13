@@ -6,21 +6,24 @@ import (
 	"uuid"
 )
 
+// Recieving from API
 type Transaction struct {
 	TransactionID uuid.UUID `json:"transaction_id"`
 	UserID        uuid.UUID `json:"User_id"`
-	Amount        float32   `json:"Amount"`
+	Amount        float64   `json:"Amount"`
 	Category      string    `json:"Category"`
 	Timestamp     string    `json:"Timestamp"`
 }
 
+// Database Schema
 type Account struct {
-	UserID       uuid.UUID `json:"user_id"`
-	Email        string    `json:"email"`
-	Password     string    `json:"-"`
-	Amount       float32   `json:"amount"`
-	WeeklySpend  float32   `json:"weekly_spend"`
-	MonthlySpend float32   `json:"monthly_spend"`
+	UserID       uuid.UUID
+	Email        string
+	Password     string
+	Balance      float64
+	Transactions []*Transaction
+	WeeklySpend  float64
+	MonthlySpend float64
 }
 
 func (t Transaction) validate() error {
